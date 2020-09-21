@@ -3,11 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/styles.css">
     <title>Weather App</title>
 </head>
 <body>
-    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="weather-input" aria-describedby="emailHelp" placeholder="enter city">
+                    </div>
+                    <button type="submit" class = "btn btn-primary" id="weather-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
