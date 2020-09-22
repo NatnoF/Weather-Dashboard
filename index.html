@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/styles.css">
     <title>Weather App</title>
 </head>
 <body>
-    <div class="container mt-5">
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+    <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <form>
-                    <div class="form-group">
+            <div class="col-md-4 bg-light">
+                <h4>Search for a City:</h4>
+                <form class="input-group">
+                    <div>
                         <input type="email" class="form-control" id="weather-input" aria-describedby="emailHelp" placeholder="enter city">
                     </div>
-                    <button type="submit" class = "btn btn-primary" id="weather-btn">Submit</button>
+                    <button type="submit" class = "btn btn-primary" id="weather-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
+            </div>
+            <div class="col-md-8">
+                <div id="weather" class="bg-white"></div>
             </div>
         </div>
     </div>

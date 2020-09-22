@@ -1,0 +1,17 @@
+header
+{
+    background-color: rgb(52, 58, 64);
+    color: whitesmoke;
+    text-align: center;
+    padding: 10px;
+}
+
+.container
+{
+    max-width: 100%;
+}
+
+.col-md-8, .col-md-4
+{
+    padding-top: 5px;
+}

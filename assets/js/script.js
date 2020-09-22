@@ -1,3 +1,6 @@
+// Global Variables
+
+
 $(document).ready(function ()
 {
     $("#weather-btn").on("click", function(event)
@@ -18,6 +21,10 @@ $(document).ready(function ()
         }).then(function(data)
         {
             console.log(data);
+            var lat = data.coord.lat;
+            var lon = data.coord.lon;
+            uvIndex(lat,lon);
+
         })
     }
 
@@ -33,4 +40,16 @@ $(document).ready(function ()
         })
     }
 
+    function uvIndex(lat, lon)
+    {
+        $.ajax(
+        {
+            method: "GET",
+            url: "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=a0770a518a887ec5aa5cb207e7a24651"
+        }).then(function(data)
+        {
+            console.log(data);
+            var uv = data.value;
+        })
+    }
 });
