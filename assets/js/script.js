@@ -34,7 +34,6 @@ $(document).ready(function ()
             url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=a0770a518a887ec5aa5cb207e7a24651"
         }).then(function(data)
         {
-            console.log(data);
             var lat = data.coord.lat;
             var lon = data.coord.lon;
             uvIndex(lat,lon);
@@ -61,7 +60,6 @@ $(document).ready(function ()
             url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=a0770a518a887ec5aa5cb207e7a24651"
         }).then(function(data)
         {
-            console.log(data);
             for (i = 0; i < data.list.length; i++)
             {
                 if (data.list[i].dt_txt.indexOf("12:00:00") != -1)
@@ -107,8 +105,9 @@ $(document).ready(function ()
             url: "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=a0770a518a887ec5aa5cb207e7a24651"
         }).then(function(data)
         {
-            console.log(data);
             uvButtonEl.text(data.value)
+
+            // Decision making for what color to make the UV index indicator
             if (data.value >= 8)
             {
                 uvButtonEl.attr("style", "background-color: rgb(220, 53, 69);");
