@@ -30,3 +30,13 @@ h2
 {
     margin-bottom: 20px;
 }
+
+#uv
+{
+    padding: 5px;
+    width: 45px;
+    border-radius: 5px;
+    color: whitesmoke;
+    outline: none;
+    border: none;
+}

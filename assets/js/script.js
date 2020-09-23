@@ -4,6 +4,7 @@ var currentTempEl = $("<p>");
 var currentHumidityEl = $("<p>");
 var currentWindEl = $("<p>");
 var uvIndexEl = $("<p>");
+var uvButtonEl = $("<button>");
 var currentImage = $("<img>");
 
 var forecastDivEl = $("<div>");
@@ -23,6 +24,10 @@ forecastCardEl.addClass("card-body");
 forecastDateEl.addClass("card-title");
 forecastTempEl.addClass("card-text");
 forecastHumidityEl.addClass("card-text");
+
+uvButtonEl.attr("type", "button");
+uvButtonEl.attr("disabled", true);
+uvButtonEl.attr("id", "uv");
 
 
 $(document).ready(function ()
@@ -53,10 +58,11 @@ $(document).ready(function ()
             currentTempEl.text("Temperature: " + data.main.temp + " \u00B0F");
             currentHumidityEl.text("Humidity: " + data.main.humidity + "%");
             currentWindEl.text("Wind Speed: " + data.wind.speed + " MPH");
+            uvIndexEl.text("UV Index: ");
 
             currentCityEl.append($("<img>",{src:"http://openweathermap.org/img/w/" + data.weather[0].icon + ".png"}));
 
-            currentWeatherDiv.append(currentCityEl, currentTempEl, currentHumidityEl, currentWindEl);
+            currentWeatherDiv.append(currentCityEl, currentTempEl, currentHumidityEl, currentWindEl, uvIndexEl);
 
         })
     }
@@ -82,7 +88,21 @@ $(document).ready(function ()
         }).then(function(data)
         {
             console.log(data);
-            var uv = data.value;
+            uvButtonEl.text(data.value)
+            if (data.value >= 8)
+            {
+                uvButtonEl.attr("style", "background-color: rgb(220, 53, 69);");
+            }
+            else if (data.value >= 3)
+            {
+                uvButtonEl.attr("style", "background-color: rgb(236, 135, 41);");
+            }
+            else
+            {
+                uvButtonEl.attr("style", "background-color: rgb(37, 216, 46);");
+            }
+
+            uvIndexEl.append(uvButtonEl);
         })
     }
 });
