@@ -7,23 +7,8 @@ var uvIndexEl = $("<p>");
 var uvButtonEl = $("<button>");
 var currentImage = $("<img>");
 
-var forecastDivEl = $("<div>");
-var forecastCardEl = $("<div>");
-var forecastDateEl = $("<h5>");
-var forecastImageEl = $("<img>");
-var forecastTempEl = $("<p>");
-var forecastHumidityEl = $("<p>");
-
 var forecastDiv = $("#forecast");
 var currentWeatherDiv = $("#currentWeather");
-
-//Setting up the elements to have the appropriate classes for styling
-forecastDivEl.addClass("card text-white bg-primary mb-3 mr-4");
-forecastDivEl.css("max-width", "10rem");
-forecastCardEl.addClass("card-body");
-forecastDateEl.addClass("card-title");
-forecastTempEl.addClass("card-text");
-forecastHumidityEl.addClass("card-text");
 
 uvButtonEl.attr("type", "button");
 uvButtonEl.attr("disabled", true);
@@ -69,6 +54,7 @@ $(document).ready(function ()
 
     function forecast(city)
     {
+        forecastDiv.text("");
         $.ajax(
         {
             method: "GET",
@@ -76,6 +62,40 @@ $(document).ready(function ()
         }).then(function(data)
         {
             console.log(data);
+            for (i = 0; i < data.list.length; i++)
+            {
+                if (data.list[i].dt_txt.indexOf("12:00:00") != -1)
+                {
+                    // Creating forecast card elements
+                    var forecastDivEl = $("<div>");
+                    var forecastCardEl = $("<div>");
+                    var forecastDateEl = $("<h5>");
+                    var forecastImageEl = $("<p>");
+                    var forecastTempEl = $("<p>");
+                    var forecastHumidityEl = $("<p>");
+
+                    // Setting up the elements to have the appropriate classes for styling
+                    forecastDivEl.addClass("card text-white bg-primary mb-3 mr-4");
+                    forecastDivEl.css("max-width", "10rem");
+                    forecastCardEl.addClass("card-body");
+                    forecastDateEl.addClass("card-title");
+                    forecastImageEl.addClass("card-text");
+                    forecastTempEl.addClass("card-text");
+                    forecastHumidityEl.addClass("card-text");
+
+                    // Creating the content for the cards
+                    var date = new Date(data.list[i].dt * 1000);
+                    forecastDateEl.text(date.toLocaleDateString('en-US'));
+                    forecastImageEl.append($("<img>",{src:"http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png"}));
+                    forecastTempEl.text("Temperature: " + data.list[i].main.temp + " \u00B0F");
+                    forecastHumidityEl.text("Humidity: " + data.list[i].main.humidity + "%");
+
+                    // Appending the cards to the page
+                    forecastCardEl.append(forecastDateEl, forecastImageEl, forecastTempEl, forecastHumidityEl);
+                    forecastDivEl.append(forecastCardEl);
+                    forecastDiv.append(forecastDivEl);
+                }
+            }
         })
     }
 
