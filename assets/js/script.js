@@ -44,7 +44,7 @@ $(document).ready(function ()
             currentWindEl.text("Wind Speed: " + data.wind.speed + " MPH");
             uvIndexEl.text("UV Index: ");
 
-            currentCityEl.append($("<img>",{src:"http://openweathermap.org/img/w/" + data.weather[0].icon + ".png"}));
+            currentCityEl.append($("<img>",{src:"https://openweathermap.org/img/w/" + data.weather[0].icon + ".png"}));
 
             currentWeatherDiv.append(currentCityEl, currentTempEl, currentHumidityEl, currentWindEl, uvIndexEl);
 
@@ -84,7 +84,7 @@ $(document).ready(function ()
                     // Creating the content for the cards
                     var date = new Date(data.list[i].dt * 1000);
                     forecastDateEl.text(date.toLocaleDateString('en-US'));
-                    forecastImageEl.append($("<img>",{src:"http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png"}));
+                    forecastImageEl.append($("<img>",{src:"https://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png"}));
                     forecastTempEl.text("Temperature: " + data.list[i].main.temp + " \u00B0F");
                     forecastHumidityEl.text("Humidity: " + data.list[i].main.humidity + "%");
 
