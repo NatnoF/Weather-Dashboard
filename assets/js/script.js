@@ -29,7 +29,6 @@ $(document).ready(function ()
         var cityInput = $("#weather-input").val().trim();
         currentWeather(cityInput);
         forecast(cityInput);
-        storeSearches(cityInput);
     });
 
     function renderSearches()
@@ -87,6 +86,7 @@ $(document).ready(function ()
             var lat = data.coord.lat;
             var lon = data.coord.lon;
             uvIndex(lat,lon);
+            storeSearches(city);
 
             currentCityEl.text(data.name + " (" + moment().format("MM/DD/YYYY") + ")");
             currentTempEl.text("Temperature: " + data.main.temp + " \u00B0F");
