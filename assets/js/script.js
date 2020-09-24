@@ -102,7 +102,7 @@ $(document).ready(function ()
         $.ajax(
         {
             method: "GET",
-            url: "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=a0770a518a887ec5aa5cb207e7a24651"
+            url: "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=a0770a518a887ec5aa5cb207e7a24651"
         }).then(function(data)
         {
             uvButtonEl.text(data.value)
