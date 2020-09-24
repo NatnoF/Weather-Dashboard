@@ -9,6 +9,9 @@ var currentImage = $("<img>");
 
 var forecastDiv = $("#forecast");
 var currentWeatherDiv = $("#currentWeather");
+var searchesDiv = $("#searches");
+
+var searches = [];
 
 uvButtonEl.attr("type", "button");
 uvButtonEl.attr("disabled", true);
@@ -17,6 +20,8 @@ uvButtonEl.attr("id", "uv");
 
 $(document).ready(function ()
 {
+    init();
+
     $("#weather-btn").on("click", function(event)
     {
         event.preventDefault();
@@ -24,7 +29,52 @@ $(document).ready(function ()
         var cityInput = $("#weather-input").val().trim();
         currentWeather(cityInput);
         forecast(cityInput);
+        storeSearches(cityInput);
     });
+
+    function renderSearches()
+    {
+        searchesDiv.text("");
+        
+        for (var i = 0; i < searches.length; i++)
+        {
+            var button = $("<button>");
+            button.addClass("list-group-item text-left");
+            button.text(searches[i]);
+
+            searchesDiv.append(button);
+        }
+    }
+
+    function init()
+    {
+        var storedSearches = JSON.parse(localStorage.getItem("searches"));
+
+        if (storedSearches !== null)
+        {
+            searches = storedSearches;
+        }
+
+        renderSearches();
+    }
+
+    function storeSearches(cityInput)
+    {
+        localStorage.setItem("searches", JSON.stringify(searches));
+
+        var searchesText = cityInput;
+        if (searchesText === "" || searches.includes(searchesText))
+        {
+            return;
+        }
+
+        searches.push(searchesText);
+        searchesText = "";
+
+        storeSearches(searchesText);
+        renderSearches();
+
+    }
 
     function currentWeather(city)
     {
@@ -124,4 +174,17 @@ $(document).ready(function ()
             uvIndexEl.append(uvButtonEl);
         })
     }
+
+    $("#searches").on("click", function(event)
+    {
+        var element = event.target;
+
+        if (element.matches("button") === true)
+        {
+            var cityInput = element.innerText;
+            currentWeather(cityInput);
+            forecast(cityInput);
+        }
+    });
+
 });
